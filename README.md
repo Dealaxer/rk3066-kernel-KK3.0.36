@@ -5,7 +5,7 @@ Kernel for Cube U30GT-H (Android 4.4.4)
 <strong>Install Tools</strong><br>
 Command:<br>
 <i>apt-get install git-core gnupg flex bison gperf libsdl1.2-dev libesd0-dev libwxgtk3.0-dev build-essential zip curl libncurses5-dev zlib1g-dev lib32z1-dev lib32ncurses5-dev gcc-multilib g++-multilib sharutils lzop</i><br><br>
-(To build the kernel 3.0.36 Android 4.4.x, use toolchain with GCC 4.4.3)<br>
+(To build the kernel 3.0.36 Android 4.4.x, use toolchain with GCC 4.6.x)<br>
 Command:<br>
 <i>export ARCH=arm</i><br>
 <i>export CROSS_COMPILE=(<strong>Your Path</strong>)/toolchain/arm-eabi-4.6/bin/arm-eabi-</i><br><br>
