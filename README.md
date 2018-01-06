@@ -1,8 +1,7 @@
 # rk3066-kernel-KK3.0.36
 Kernel for Cube U30GT-H (Android 4.4.4)
-
+<br><br>
 <strong>How to compile a kernel for Cube U30GT-H</strong>:<br>
-<br>
 <strong>Install Tools</strong><br>
 Command:<br>
 <i>apt-get install git-core gnupg flex bison gperf libsdl1.2-dev libesd0-dev libwxgtk3.0-dev build-essential zip curl libncurses5-dev zlib1g-dev lib32z1-dev lib32ncurses5-dev gcc-multilib g++-multilib sharutils lzop</i><br><br>
