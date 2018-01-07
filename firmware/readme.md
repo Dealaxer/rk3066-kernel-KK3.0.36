@@ -8,5 +8,5 @@ Size: 251,4 MB<br>
 Version 1.12 (2018-07-01) Gen2.25<br>
 Size: 251,3 MB<br>
 Added: Support Touchscreen CT36x<br>
-Update: build.prop
+Update: build.prop<br>
 <a href="https://yadi.sk/d/Cf9-ijvz3RFMLL" target="_blank">Download</a>
