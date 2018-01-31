@@ -52,24 +52,24 @@ module_param_named(dbg_level, rk30_battery_dbg_level, int, 0644);
 	} while (0)
 
 
-/*******************ÒÔÏÂ²ÎÊı¿ÉÒÔĞŞ¸Ä******************************/
-#define	TIMER_MS_COUNTS		 1000	//¶¨Ê±Æ÷µÄ³¤¶Èms
-//ÒÔÏÂ²ÎÊıĞèÒª¸ù¾İÊµ¼Ê²âÊÔµ÷Õû
-#define	SLOPE_SECOND_COUNTS	               15	//Í³¼ÆµçÑ¹Ğ±ÂÊµÄÊ±¼ä¼ä¸ôs
-#define	DISCHARGE_MIN_SECOND	               45	//×î¿ì·Åµçµç1%Ê±¼ä
-#define	CHARGE_MIN_SECOND	               45	//×î¿ì³äµçµç1%Ê±¼ä
-#define	CHARGE_MID_SECOND	               90	//ÆÕÍ¨³äµçµç1%Ê±¼ä
-#define	CHARGE_MAX_SECOND	               250	//×î³¤³äµçµç1%Ê±¼ä
-#define   CHARGE_FULL_DELAY_TIMES          10          //³äµçÂú¼ì²â·À¶¶Ê±¼ä
-#define   USBCHARGE_IDENTIFY_TIMES        5           //²åÈëUSB»ìÁ÷£¬pcÊ¶±ğ¼ì²âÊ±¼ä
+/*******************ä»¥ä¸‹å‚æ•°å¯ä»¥ä¿®æ”¹******************************/
+#define	TIMER_MS_COUNTS		 1000	//å®šæ—¶å™¨çš„é•¿åº¦ms
+//ä»¥ä¸‹å‚æ•°éœ€è¦æ ¹æ®å®é™…æµ‹è¯•è°ƒæ•´
+#define	SLOPE_SECOND_COUNTS	               15	//ç»Ÿè®¡ç”µå‹æ–œç‡çš„æ—¶é—´é—´éš”s
+#define	DISCHARGE_MIN_SECOND	               45	//æœ€å¿«æ”¾ç”µç”µ1%æ—¶é—´
+#define	CHARGE_MIN_SECOND	               45	//æœ€å¿«å……ç”µç”µ1%æ—¶é—´
+#define	CHARGE_MID_SECOND	               90	//æ™®é€šå……ç”µç”µ1%æ—¶é—´
+#define	CHARGE_MAX_SECOND	               250	//æœ€é•¿å……ç”µç”µ1%æ—¶é—´
+#define   CHARGE_FULL_DELAY_TIMES          10          //å……ç”µæ»¡æ£€æµ‹é˜²æŠ–æ—¶é—´
+#define   USBCHARGE_IDENTIFY_TIMES        5           //æ’å…¥USBæ··æµï¼Œpcè¯†åˆ«æ£€æµ‹æ—¶é—´
 
 #define	NUM_VOLTAGE_SAMPLE	                       ((SLOPE_SECOND_COUNTS * 1000) / TIMER_MS_COUNTS)	 
 #define	NUM_DISCHARGE_MIN_SAMPLE	         ((DISCHARGE_MIN_SECOND * 1000) / TIMER_MS_COUNTS)	 
 #define	NUM_CHARGE_MIN_SAMPLE	         ((CHARGE_MIN_SECOND * 1000) / TIMER_MS_COUNTS)	    
 #define	NUM_CHARGE_MID_SAMPLE	         ((CHARGE_MID_SECOND * 1000) / TIMER_MS_COUNTS)	     
 #define	NUM_CHARGE_MAX_SAMPLE	         ((CHARGE_MAX_SECOND * 1000) / TIMER_MS_COUNTS)	  
-#define   NUM_CHARGE_FULL_DELAY_TIMES         ((CHARGE_FULL_DELAY_TIMES * 1000) / TIMER_MS_COUNTS)	//³äµçÂú×´Ì¬³ÖĞøÊ±¼ä³¤¶È
-#define   NUM_USBCHARGE_IDENTIFY_TIMES      ((USBCHARGE_IDENTIFY_TIMES * 1000) / TIMER_MS_COUNTS)	//³äµçÂú×´Ì¬³ÖĞøÊ±¼ä³¤¶È
+#define   NUM_CHARGE_FULL_DELAY_TIMES         ((CHARGE_FULL_DELAY_TIMES * 1000) / TIMER_MS_COUNTS)	//å……ç”µæ»¡çŠ¶æ€æŒç»­æ—¶é—´é•¿åº¦
+#define   NUM_USBCHARGE_IDENTIFY_TIMES      ((USBCHARGE_IDENTIFY_TIMES * 1000) / TIMER_MS_COUNTS)	//å……ç”µæ»¡çŠ¶æ€æŒç»­æ—¶é—´é•¿åº¦
 
 #define   CHARGE_IS_OK                    1
 #define   INVALID_CHARGE_CHECK               -1
@@ -98,8 +98,8 @@ struct batt_vol_cal{
 
 #ifdef CONFIG_BATTERY_RK30_VOL3V8
 
-#define BATT_MAX_VOL_VALUE                             4120               	//ÂúµçÊ±µÄµç³ØµçÑ¹	 
-#define BATT_ZERO_VOL_VALUE                            3400              	//¹Ø»úÊ±µÄµç³ØµçÑ¹
+#define BATT_MAX_VOL_VALUE                             4120               	//æ»¡ç”µæ—¶çš„ç”µæ± ç”µå‹	 
+#define BATT_ZERO_VOL_VALUE                            3400              	//å…³æœºæ—¶çš„ç”µæ± ç”µå‹
 #define BATT_NOMAL_VOL_VALUE                         3800               
 //divider resistance 
 #define BAT_PULL_UP_R                                         200
@@ -326,7 +326,7 @@ static int rk30_adc_battery_status_samples(struct rk30_adc_battery_data *bat)
 //	struct rk30_adc_battery_platform_data *pdata = bat->pdata;
 	charge_level = rk30_adc_battery_get_charge_level(bat);
 
-	//¼ì²â³äµç×´Ì¬±ä»¯Çé¿ö
+	//æ£€æµ‹å……ç”µçŠ¶æ€å˜åŒ–æƒ…å†µ
 	if (charge_level != bat->old_charge_level){
 		bat->old_charge_level = charge_level;
 		bat->bat_change  = 1;
@@ -337,7 +337,7 @@ static int rk30_adc_battery_status_samples(struct rk30_adc_battery_data *bat)
 		else{
 			rk30_adc_battery_charge_disable(bat);
 		}
-		bat->bat_status_cnt = 0;        //×´Ì¬±ä»¯¿ªÊ¼¼ÆÊı
+		bat->bat_status_cnt = 0;        //çŠ¶æ€å˜åŒ–å¼€å§‹è®¡æ•°
 	}
 
 	if(charge_level == 0){   
@@ -367,7 +367,7 @@ static int rk30_adc_battery_status_samples(struct rk30_adc_battery_data *bat)
 				bat->bat_status = POWER_SUPPLY_STATUS_CHARGING;
 			}
 			else{
-	//¼ì²âµ½³äµçÂúµçÆ½±êÖ¾
+	//æ£€æµ‹åˆ°å……ç”µæ»¡ç”µå¹³æ ‡å¿—
 				bat->full_times++;
 
 				if (bat->full_times >= NUM_CHARGE_FULL_DELAY_TIMES) {
@@ -447,7 +447,7 @@ static void rk30_adc_battery_voltage_samples(struct rk30_adc_battery_data *bat)
 	}
 	bat->bat_voltage = value / num;
 
-	/*Ïû³ıÃ«´ÌµçÑ¹*/
+	/*æ¶ˆé™¤æ¯›åˆºç”µå‹*/
 	if(1 == level){
 		if(bat->bat_voltage >= batt_table[BATT_NUM-1].charge_vol+ 10)
 			bat->bat_voltage = batt_table[BATT_NUM-1].charge_vol  + 10;
@@ -523,7 +523,7 @@ static void rk30_adc_battery_capacity_samples(struct rk30_adc_battery_data *bat)
 	int timer_of_charge_sample = NUM_CHARGE_MIN_SAMPLE;
 	int timer_of_discharge_sample = NUM_CHARGE_MIN_SAMPLE;
 
-	//³ä·Åµç×´Ì¬±ä»¯ºó£¬BufferÌîÂúÖ®Ç°£¬²»¸üĞÂ
+	//å……æ”¾ç”µçŠ¶æ€å˜åŒ–åï¼ŒBufferå¡«æ»¡ä¹‹å‰ï¼Œä¸æ›´æ–°
 	if (bat->bat_status_cnt < NUM_VOLTAGE_SAMPLE)  {
 		bat->gBatCapacityDisChargeCnt = 0;
 		bat->gBatCapacityChargeCnt    = 0;
@@ -540,7 +540,7 @@ static void rk30_adc_battery_capacity_samples(struct rk30_adc_battery_data *bat)
 			        timer_of_charge_sample = NUM_CHARGE_MIN_SAMPLE -5; //10s
 			        else if(capacity > bat->bat_capacity + 3 )
 			                timer_of_charge_sample = NUM_CHARGE_MIN_SAMPLE - 2; // 13
-			//Êµ¼Ê²ÉÑùµ½µÄÈİÁ¿±ÈÏÔÊ¾µÄÈİÁ¿´ó£¬Öğ¼¶ÉÏÉı
+			//å®é™…é‡‡æ ·åˆ°çš„å®¹é‡æ¯”æ˜¾ç¤ºçš„å®¹é‡å¤§ï¼Œé€çº§ä¸Šå‡
 			if (++(bat->gBatCapacityDisChargeCnt) >= timer_of_charge_sample){
 				bat->gBatCapacityDisChargeCnt  = 0;
 				if (bat->bat_capacity < 99){
@@ -550,7 +550,7 @@ static void rk30_adc_battery_capacity_samples(struct rk30_adc_battery_data *bat)
 			}
 			bat->gBatCapacityChargeCnt = 0;
 		}
-		else{  //   Êµ¼ÊµÄÈİÁ¿±È²ÉÑù±È ÏÔÊ¾µÄÈİÁ¿Ğ¡
+		else{  //   å®é™…çš„å®¹é‡æ¯”é‡‡æ ·æ¯” æ˜¾ç¤ºçš„å®¹é‡å°
 		            bat->gBatCapacityDisChargeCnt = 0;
 		            (bat->gBatCapacityChargeCnt)++;
 			pr_bat("------------- is_charge_ok(bat)=%d\n", is_charge_ok(bat));
@@ -564,7 +564,7 @@ static void rk30_adc_battery_capacity_samples(struct rk30_adc_battery_data *bat)
 					        timer_of_charge_sample = NUM_CHARGE_MIN_SAMPLE -10; //10s
 					else if(capacity > bat->bat_capacity + 2 )
 					        timer_of_charge_sample = NUM_CHARGE_MIN_SAMPLE -8; //7s					
-				//¼ì²âµ½µç³Ø³äÂú±êÖ¾£¬Í¬Ê±³¤Ê±¼äÄÚ³äµçµçÑ¹ÎŞ±ä»¯£¬¿ªÊ¼Æô¶¯¼ÆÊ±³äµç£¬¿ìËÙÉÏÉıÈİÁ¿
+				//æ£€æµ‹åˆ°ç”µæ± å……æ»¡æ ‡å¿—ï¼ŒåŒæ—¶é•¿æ—¶é—´å†…å……ç”µç”µå‹æ— å˜åŒ–ï¼Œå¼€å§‹å¯åŠ¨è®¡æ—¶å……ç”µï¼Œå¿«é€Ÿä¸Šå‡å®¹é‡
 					if (bat->gBatCapacityChargeCnt >= timer_of_charge_sample){
 						bat->gBatCapacityChargeCnt = 0;
 						if (bat->bat_capacity < 99){
@@ -576,7 +576,7 @@ static void rk30_adc_battery_capacity_samples(struct rk30_adc_battery_data *bat)
 				else{
 #if 0					
 					if (capacity > capacitytmp){
-					//¹ı³ÌÖĞÈç¹ûµçÑ¹ÓĞÔö³¤£¬¶¨Ê±Æ÷¸´Î»£¬·ÀÖ¹¶¨Ê±Æ÷Ä£Äâ³äµç±ÈÊµ¼Ê³äµç¿ì
+					//è¿‡ç¨‹ä¸­å¦‚æœç”µå‹æœ‰å¢é•¿ï¼Œå®šæ—¶å™¨å¤ä½ï¼Œé˜²æ­¢å®šæ—¶å™¨æ¨¡æ‹Ÿå……ç”µæ¯”å®é™…å……ç”µå¿«
 						gBatCapacityChargeCnt = 0;
 					}
 					else if (/*bat->bat_capacity >= 85) &&*/ (gBatCapacityChargeCnt > NUM_CHARGE_MAX_SAMPLE)){
@@ -588,9 +588,9 @@ static void rk30_adc_battery_capacity_samples(struct rk30_adc_battery_data *bat)
 						}
 					}
 				}
-#else			//  ·ÀÖ¹µç³ØÀÏ»¯ºó³öÏÖ³å²»ÂúµÄÇé¿ö£¬
+#else			//  é˜²æ­¢ç”µæ± è€åŒ–åå‡ºç°å†²ä¸æ»¡çš„æƒ…å†µï¼Œ
 					if (capacity > bat->capacitytmp){
-					//¹ı³ÌÖĞÈç¹ûµçÑ¹ÓĞÔö³¤£¬¶¨Ê±Æ÷¸´Î»£¬·ÀÖ¹¶¨Ê±Æ÷Ä£Äâ³äµç±ÈÊµ¼Ê³äµç¿ì
+					//è¿‡ç¨‹ä¸­å¦‚æœç”µå‹æœ‰å¢é•¿ï¼Œå®šæ—¶å™¨å¤ä½ï¼Œé˜²æ­¢å®šæ—¶å™¨æ¨¡æ‹Ÿå……ç”µæ¯”å®é™…å……ç”µå¿«
 						bat->gBatCapacityChargeCnt = 0;
 					}
 					else{
@@ -609,9 +609,9 @@ static void rk30_adc_battery_capacity_samples(struct rk30_adc_battery_data *bat)
 
 			}
 			else{
-			//Ã»ÓĞ³äµçÂú¼ì²â½Å£¬³¤Ê±¼äÄÚµçÑ¹ÎŞ±ä»¯£¬¶¨Ê±Æ÷Ä£Äâ³äµç
+			//æ²¡æœ‰å……ç”µæ»¡æ£€æµ‹è„šï¼Œé•¿æ—¶é—´å†…ç”µå‹æ— å˜åŒ–ï¼Œå®šæ—¶å™¨æ¨¡æ‹Ÿå……ç”µ
 				if (capacity > bat->capacitytmp){
-				//¹ı³ÌÖĞÈç¹ûµçÑ¹ÓĞÔö³¤£¬¶¨Ê±Æ÷¸´Î»£¬·ÀÖ¹¶¨Ê±Æ÷Ä£Äâ³äµç±ÈÊµ¼Ê³äµç¿ì
+				//è¿‡ç¨‹ä¸­å¦‚æœç”µå‹æœ‰å¢é•¿ï¼Œå®šæ—¶å™¨å¤ä½ï¼Œé˜²æ­¢å®šæ—¶å™¨æ¨¡æ‹Ÿå……ç”µæ¯”å®é™…å……ç”µå¿«
 					bat->gBatCapacityChargeCnt = 0;
 				}
 				else{
@@ -631,7 +631,7 @@ static void rk30_adc_battery_capacity_samples(struct rk30_adc_battery_data *bat)
 		}
 	}    
 	else{   
-	//·ÅµçÊ±,Ö»ÔÊĞíµçÑ¹ÏÂ½µ
+	//æ”¾ç”µæ—¶,åªå…è®¸ç”µå‹ä¸‹é™
 		if (capacity < bat->bat_capacity){
 			if(capacity + 10 > bat->bat_capacity  )
 			        timer_of_discharge_sample = NUM_CHARGE_MIN_SAMPLE -10;  //5s
@@ -677,10 +677,10 @@ static void rk30_adc_battery_poweron_capacity_check(void)
 	}
 	else if (gBatteryData->bat_status != POWER_SUPPLY_STATUS_NOT_CHARGING){
 	//chargeing state
-	//ÎÊÌâ£º
-//	//1£©³¤Ê±¼ä¹Ø»ú·ÅÖÃºó£¬¿ª»úºó¶ÁÈ¡µÄÈİÁ¿Ô¶Ô¶´óÓÚÊµ¼ÊÈİÁ¿ÔõÃ´°ì£¿
-//	//2£©Èç¹û²»ÕâÑù×ö£¬¶ÌÊ±¼ä¹Ø»úÔÙ¿ª»ú£¬Ç°ºóÈİÁ¿²»Ò»ÖÂÓÖ¸ÃÔõÃ´°ì£¿
-//	//3£©Ò»ÏÂÄÇÖÖ·½Ê½ºÏÊÊ£¿
+	//é—®é¢˜ï¼š
+//	//1ï¼‰é•¿æ—¶é—´å…³æœºæ”¾ç½®åï¼Œå¼€æœºåè¯»å–çš„å®¹é‡è¿œè¿œå¤§äºå®é™…å®¹é‡æ€ä¹ˆåŠï¼Ÿ
+//	//2ï¼‰å¦‚æœä¸è¿™æ ·åšï¼ŒçŸ­æ—¶é—´å…³æœºå†å¼€æœºï¼Œå‰åå®¹é‡ä¸ä¸€è‡´åˆè¯¥æ€ä¹ˆåŠï¼Ÿ
+//	//3ï¼‰ä¸€ä¸‹é‚£ç§æ–¹å¼åˆé€‚ï¼Ÿ
 	//gBatteryData->bat_capacity = new_capacity;
 		gBatteryData->bat_capacity = (new_capacity > old_capacity) ? new_capacity : old_capacity;
 	}else{
@@ -836,7 +836,7 @@ static int rk30_adc_battery_get_health(struct rk30_adc_battery_data *bat)
 
 static int rk30_adc_battery_get_present(struct rk30_adc_battery_data *bat)
 {
-	return (bat->bat_voltage < BATT_MAX_VOL_VALUE) ? 0 : 1;
+	return 1;//(bat->bat_voltage < BATT_MAX_VOL_VALUE) ? 0 : 1;
 }
 
 static int rk30_adc_battery_get_voltage(struct rk30_adc_battery_data *bat)
@@ -1183,7 +1183,7 @@ static void rk30_adc_battery_check(struct rk30_adc_battery_data *bat)
 	gBatteryData->poweron_check = 0;
 #endif
 /*******************************************
-//¿ª»ú²ÉÑùµ½µÄµçÑ¹ºÍÉÏ´Î¹Ø»ú±£´æµçÑ¹Ïà²î½Ï´ó£¬ÔõÃ´´¦Àí£¿
+//å¼€æœºé‡‡æ ·åˆ°çš„ç”µå‹å’Œä¸Šæ¬¡å…³æœºä¿å­˜ç”µå‹ç›¸å·®è¾ƒå¤§ï¼Œæ€ä¹ˆå¤„ç†ï¼Ÿ
 if (bat->bat_capacity > old_capacity)
 {
 if ((bat->bat_capacity - old_capacity) > 20)
