@@ -14,7 +14,7 @@ Added: Сorrect display of all memory<br>
 Update: build.prop<br>
 <a href="https://yadi.sk/d/kcPKVIBN3SCsHB" target="_blank">Download</a>
 <br><br><br>
-#TVBOX Android 4.4.2 (AOSP) для Cube U30GT-H (HDMI)
+#TVBOX Android 4.4.2 (AOSP) for Cube U30GT-H (HDMI)
 <br><br>
 Version 1.00 (2018-29-01) Gen2.25<br>
 Size: 195,4 MB<br>
