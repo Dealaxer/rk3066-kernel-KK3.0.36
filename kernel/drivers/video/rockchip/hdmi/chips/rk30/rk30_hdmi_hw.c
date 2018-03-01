@@ -66,7 +66,9 @@ static void rk30_hdmi_set_pwr_mode(int mode)
 
 int rk30_hdmi_detect_hotplug(void)
 {
-	int value =	HDMIRdReg(HPD_MENS_STA);
+	//Support hotplug HDMI cable
+	return HDMI_HPD_ACTIVED;
+	/*int value =	HDMIRdReg(HPD_MENS_STA);
 	
 	hdmi_dbg(hdmi->dev, "[%s] value %02x\n", __FUNCTION__, value);
 	#if 0
@@ -86,7 +88,7 @@ int rk30_hdmi_detect_hotplug(void)
 		return HDMI_HPD_INSERT;
 	else
 		return HDMI_HPD_REMOVED;
-	#endif
+	#endif*/
 }
 
 #define HDMI_EDID_DDC_CLK	90000
