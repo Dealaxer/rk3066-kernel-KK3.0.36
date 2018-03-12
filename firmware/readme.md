@@ -26,6 +26,23 @@ Size: 195,4 MB<br>
 
 <a href="https://yadi.sk/d/c3E0EuUo3RtiXV" target="_blank">Download</a>
 <br><br><br>
+#TVBOX Android 4.4.2 (AOSP) for Cube U30GT-H (HDMI) - FULL HD
+<br><br>
+Version 1.01 (2018-12-03) Gen2.25<br>
+Size: 299,2 MB<br>
+- Changed the resolution of the device with 1280x720(160dpi) at 1920x1080(240dpi)
+- Removed the standard(Asian) keyboard
+- Removed Launcher New
+- Added support for game controllers to the kernel
+- Added ATV Launcher
+- Added LeanKey Keyboard
+- Added Asus Weather app
+- Added YouTube TV app v1.2.7
+- Added GAPPS
+
+
+<a href="https://yadi.sk/d/5tjNXaUY3THQjU" target="_blank">Download</a>
+<br><br><br>
 #Root Firmware for Cube U30GT-H
 (Android 4.4.4)
 <br><br>
